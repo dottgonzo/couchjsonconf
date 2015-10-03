@@ -1,0 +1,10 @@
+{
+  "couchdb":{
+"protocol":"http",
+"domain":"localhost",
+"port":"5984",
+"database":"testdb",
+"user":"admin",
+"password":"admin"
+}
+}
