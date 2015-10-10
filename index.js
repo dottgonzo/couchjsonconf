@@ -1,16 +1,14 @@
-var url=require('url')
-
+'use strict';
+var URL=require('url-parse');
 module.exports = function(json) {
   if(json.user&&json.password){
-    json.url=json.protocol+'://'+json.user+':'+json.password+'@'+json.domain+':'+json.port;
-    json.data=json.protocol+'://'+json.user+':'+json.password+'@'+json.domain+':'+json.port+'/'+json.database;
-json.uri=url(json.data)
-  } else{
-    json.url=json.protocol+'://'+json.domain+':'+json.port;
-    json.data=json.protocol+'://'+json.domain+':'+json.port+'/'+json.database;
-    json.uri=url(json.data)
+    var url=new URL(json.protocol+'://'+json.user+':'+json.password+'@'+json.domain+':'+json.port+'/'+json.database);
+      } else{
+
+    var url=new URL(json.protocol+'://'+json.domain+':'+json.port+'/'+json.database);
+
   }
 
-return json
+return url
 
 }
