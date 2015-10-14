@@ -1,15 +1,46 @@
 'use strict';
-var URL=require('url-parse');
+
 module.exports = function(json) {
 
-  if(json.user&&json.password){
-    var url=new URL(json.protocol+'://'+json.user+':'+json.password+'@'+json.domain+':'+json.port);
-      } else{
+var urlcouch={}
 
-    var url=new URL(json.protocol+'://'+json.domain+':'+json.port);
+
+
+urlcouch.protocol=json.protocol;
+urlcouch.hostname=json.hostname;
+urlcouch.port=json.port;
+urlcouch.host=json.hostname+':'+json.port;
+
+urlcouch.publink=urlcouch.protocol+'://'+urlcouch.hostname+':'+urlcouch.port;
+
+  if(json.user&&json.password){
+    urlcouch.user=json.user;
+    urlcouch.password=json.password;
+    urlcouch.auth=urlcouch.user+':'+urlcouch.password
+
+
+urlcouch.mylink=urlcouch.protocol+'://'+urlcouch.auth+'@'+urlcouch.hostname+':'+urlcouch.port;
+
+    if(json.database){
+      urlcouch.mydb=urlcouch.mylink+'/'+json.database;
+
+
+}
+
+      }
+
+
+  if(json.database){
+    urlcouch.db=json.database;
+
+    urlcouch.pubdb=urlcouch.publink+'/'+urlcouch.db
+
 
   }
 
-return url
+
+return urlcouch
+
+
 
 }

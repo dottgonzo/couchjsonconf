@@ -1,7 +1,7 @@
 {
   "couchdb":{
 "protocol":"http",
-"domain":"localhost",
+"hostname":"localhost",
 "port":"5984",
 "database":"testdb"
 }
