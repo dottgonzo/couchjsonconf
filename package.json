@@ -19,6 +19,7 @@
     "url": "https://github.com/dottgonzo/couchjsonconf/issues"
   },
   "devDependencies": {
+    "chai": "^3.4.1",
     "verbo": "0.0.9"
   },
   "dependencies": {}
