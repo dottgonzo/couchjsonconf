@@ -21,15 +21,15 @@ function couchUrl(json) {
     this.port=443;
     this.protocol=json.protocol;
   } else if (json.protocol) {
-    console.error('invalid protocol');
+    throw Error('invalid protocol');
   } else if (json.port) {
-    console.error('invalid port');
+    throw Error('invalid port');
   }
 
   if (json.hostname){
     this.hostname=json.hostname;
   } else {
-    console.error('no hostname specified');
+    throw Error('no hostname specified');
   }
 
   if(this.protocol=='https'&&this.port==443){
@@ -66,6 +66,17 @@ function couchUrl(json) {
   }
 }
 
+
+couchUrl.prototype.my = function (user,password,db) {
+
+  if(this.mylink){
+    return this.mylink+'/'+db
+  } else{
+    throw Error('require authorized user')
+  }
+
+};
+
 couchUrl.prototype.user = function (user,password,db) {
 
   if(db){
@@ -73,8 +84,6 @@ couchUrl.prototype.user = function (user,password,db) {
   }else {
     return this.protocol+'://'+user+':'+password+'@'+this.host
   }
-
-
 
 };
 
