@@ -4,34 +4,31 @@ verb=require('verbo');
 
 var publicDB={
   "couchdb":{
-"protocol":"https",
-"hostname":"couchdb.kernel.online",
-"port":"443",
-"database":"testdb"
-}
+    "protocol":"https",
+    "hostname":"couchdb.kernel.online",
+    "database":"testdb"
+  }
 }
 var DB={
   "couchdb":{
-"protocol":"https",
-"hostname":"couchdb.kernel.online",
-"port":"443",
-}
+    "protocol":"https",
+    "hostname":"couchdb.kernel.online"
+  }
 }
 
 var privateDB={
   "couchdb":{
     "protocol":"https",
     "hostname":"couchdb.kernel.online",
-    "port":"443",
-"database":"testdb",
-"user":"admin",
-"password":"admin"
-}
+    "database":"testdb",
+    "user":"admin",
+    "password":"admin"
+  }
 }
 
-var dbJson=couchjsonconf(DB.couchdb);
-var privateJson=couchjsonconf(privateDB.couchdb);
-var publicJson=couchjsonconf(publicDB.couchdb);
+var dbJson=new couchjsonconf(DB.couchdb);
+var privateJson=new couchjsonconf(privateDB.couchdb);
+var publicJson=new couchjsonconf(publicDB.couchdb);
 
 describe("db with https and standard 443 port", function() {
   describe("validation", function() {

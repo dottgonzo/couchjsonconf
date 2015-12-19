@@ -1,76 +1,81 @@
 'use strict';
 
-module.exports = function(json) {
+function couchUrl(json) {
 
-var urlcouch={}
+  if (json.protocol&&json.port){
+    this.protocol=json.protocol;
+    this.port=json.port;
+  } else if (!json.protocol&&!json.port) {
+    this.protocol='http';
+    this.port=80;
+  } else if (!json.protocol&&json.port&&json.port==80) {
+    this.protocol='http';
+    this.port=json.port;
+  } else if (json.protocol&&json.protocol=='http'&&!json.port) {
+    this.port=80;
+    this.protocol=json.protocol;
+  } else if (!json.protocol&&json.port&&json.port==443) {
+    this.protocol='https';
+    this.port=json.port;
+  } else if (json.protocol&&json.protocol=='https'&&!json.port) {
+    this.port=443;
+    this.protocol=json.protocol;
+  } else if (json.protocol) {
+    console.error('invalid protocol');
+  } else if (json.port) {
+    console.error('invalid port');
+  }
 
+  if (json.hostname){
+    this.hostname=json.hostname;
+  } else {
+    console.error('no hostname specified');
+  }
 
-
-urlcouch.protocol=json.protocol;
-urlcouch.hostname=json.hostname;
-urlcouch.port=json.port;
-
-
-if(urlcouch.protocol=='https'&&urlcouch.port==443){
-  urlcouch.host=json.hostname;
-
-  urlcouch.publink=urlcouch.protocol+'://'+urlcouch.hostname;
-
-} else if(urlcouch.protocol=='http'&&urlcouch.port==80){
-  urlcouch.host=json.hostname;
-
-  urlcouch.publink=urlcouch.protocol+'://'+urlcouch.hostname;
-
-} else{
-  urlcouch.host=json.hostname+':'+json.port;
-
-  urlcouch.publink=urlcouch.protocol+'://'+urlcouch.hostname+':'+urlcouch.port;
-
-}
+  if(this.protocol=='https'&&this.port==443){
+    this.host=this.hostname;
+    this.publink=this.protocol+'://'+this.hostname;
+  } else if(this.protocol=='http'&&this.port==80){
+    this.host=this.hostname;
+    this.publink=this.protocol+'://'+this.hostname;
+  } else{
+    this.host=this.hostname+':'+this.port;
+    this.publink=this.protocol+'://'+this.hostname+':'+this.port;
+  }
 
   if(json.user&&json.password){
-    urlcouch.user=json.user;
-    urlcouch.password=json.password;
-    urlcouch.auth=urlcouch.user+':'+urlcouch.password
-
-
-    if(urlcouch.protocol=='https'&&urlcouch.port==443){
-      urlcouch.mylink=urlcouch.protocol+'://'+urlcouch.auth+'@'+urlcouch.hostname;
-
-    } else if(urlcouch.protocol=='http'&&urlcouch.port==80){
-      urlcouch.mylink=urlcouch.protocol+'://'+urlcouch.auth+'@'+urlcouch.hostname;
-
+    this.user=json.user;
+    this.password=json.password;
+    this.auth=this.user+':'+this.password
+    if(this.protocol=='https'&&this.port==443){
+      this.mylink=this.protocol+'://'+this.auth+'@'+this.hostname;
+    } else if(this.protocol=='http'&&this.port==80){
+      this.mylink=this.protocol+'://'+this.auth+'@'+this.hostname;
     } else{
-      urlcouch.mylink=urlcouch.protocol+'://'+urlcouch.auth+'@'+urlcouch.hostname+':'+urlcouch.port;
-
+      this.mylink=this.protocol+'://'+this.auth+'@'+this.hostname+':'+this.port;
     }
-
-
-
-
-
-
-
     if(json.database){
-      urlcouch.mydb=urlcouch.mylink+'/'+json.database;
-
-
-}
-
-      }
-
-
-  if(json.database){
-    urlcouch.db=json.database;
-
-    urlcouch.pubdb=urlcouch.publink+'/'+urlcouch.db
-
-
+      this.mydb=this.mylink+'/'+json.database;
+    }
   }
 
 
-return urlcouch
-
-
-
+  if(json.database){
+    this.db=json.database;
+    this.pubdb=this.publink+'/'+this.db
+  }
 }
+
+couchUrl.prototype.user = function (user,password,db) {
+
+  if(db){
+    return this.protocol+'://'+user+':'+password+'@'+this.host+'/'+db
+  }else {
+    return this.protocol+'://'+user+':'+password+'@'+this.host
+  }
+
+
+
+};
+
+module.exports=couchUrl
