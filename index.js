@@ -67,7 +67,7 @@ function couchUrl(json) {
 }
 
 
-couchUrl.prototype.my = function (user,password,db) {
+couchUrl.prototype.my = function (db) {
 
   if(this.mylink){
     return this.mylink+'/'+db
