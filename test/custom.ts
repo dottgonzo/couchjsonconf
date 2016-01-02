@@ -1,28 +1,28 @@
-var expect    = require("chai").expect,
-Couchjsonconf=require('../index.js'),
-verb=require('verbo');
+let expect    = require("chai").expect;
+import Couchjsonconf = require("../index");
+let verb=require('verbo');
 
 var publicDB={
   "couchdb":{
-    "protocol":"https",
+    "protocol":"http",
     "hostname":"couchdb.kernel.online",
-    "port":"443",
+    "port":8080,
     "db":"testdb"
   }
 }
 var DB={
   "couchdb":{
-    "protocol":"https",
+    "protocol":"http",
     "hostname":"couchdb.kernel.online",
-    "port":"443",
+    "port":8080,
   }
 }
 
 var privateDB={
   "couchdb":{
-    "protocol":"https",
+    "protocol":"http",
     "hostname":"couchdb.kernel.online",
-    "port":"443",
+    "port":8080,
     "db":"testdb",
     "user":"admin",
     "password":"admin"
@@ -35,7 +35,10 @@ var publicJson=new Couchjsonconf(publicDB.couchdb);
 
 describe("db with https and standard 443 port", function() {
   describe("validation", function() {
-    verb(publicJson);
+    verb(privateJson);
+
+    verb(publicJson.for('aa','mm'));
+    verb(publicJson.for('aa','mm','zz'));
     it("is a json", function() {
       expect(publicJson).to.be.a('object');
       expect(privateJson).to.be.a('object');

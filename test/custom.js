@@ -1,63 +1,55 @@
-var expect    = require("chai").expect,
-couchjsonconf=require('../index.js'),
-verb=require('verbo');
-
-var publicDB={
-  "couchdb":{
-    "protocol":"http",
-    "hostname":"couchdb.kernel.online",
-    "port":8080,
-    "database":"testdb"
-  }
-}
-var DB={
-  "couchdb":{
-    "protocol":"http",
-    "hostname":"couchdb.kernel.online",
-    "port":8080,
-  }
-}
-
-var privateDB={
-  "couchdb":{
-    "protocol":"http",
-    "hostname":"couchdb.kernel.online",
-    "port":8080,
-    "database":"testdb",
-    "user":"admin",
-    "password":"admin"
-  }
-}
-
-var dbJson=new couchjsonconf(DB.couchdb);
-var privateJson=new couchjsonconf(privateDB.couchdb);
-var publicJson=new couchjsonconf(publicDB.couchdb);
-
-describe("db with https and standard 443 port", function() {
-  describe("validation", function() {
-    verb(privateJson);
-
-    verb(publicJson.user('aa','mm'));
-    verb(publicJson.user('aa','mm','zz'));
-    it("is a json", function() {
-      expect(publicJson).to.be.a('object');
-      expect(privateJson).to.be.a('object');
-      expect(dbJson).to.be.a('object');
-
+var expect = require("chai").expect;
+var Couchjsonconf = require("../index");
+var verb = require('verbo');
+var publicDB = {
+    "couchdb": {
+        "protocol": "http",
+        "hostname": "couchdb.kernel.online",
+        "port": 8080,
+        "db": "testdb"
+    }
+};
+var DB = {
+    "couchdb": {
+        "protocol": "http",
+        "hostname": "couchdb.kernel.online",
+        "port": 8080,
+    }
+};
+var privateDB = {
+    "couchdb": {
+        "protocol": "http",
+        "hostname": "couchdb.kernel.online",
+        "port": 8080,
+        "db": "testdb",
+        "user": "admin",
+        "password": "admin"
+    }
+};
+var dbJson = new Couchjsonconf(DB.couchdb);
+var privateJson = new Couchjsonconf(privateDB.couchdb);
+var publicJson = new Couchjsonconf(publicDB.couchdb);
+describe("db with https and standard 443 port", function () {
+    describe("validation", function () {
+        verb(privateJson);
+        verb(publicJson.for('aa', 'mm'));
+        verb(publicJson.for('aa', 'mm', 'zz'));
+        it("is a json", function () {
+            expect(publicJson).to.be.a('object');
+            expect(privateJson).to.be.a('object');
+            expect(dbJson).to.be.a('object');
+        });
+        it("contains protocol, host, hostname, port, publink", function () {
+            expect(publicJson).to.include.keys('protocol', 'publink', 'host', 'hostname', 'port');
+            expect(privateJson).to.include.keys('protocol', 'publink', 'host', 'hostname', 'port');
+            expect(dbJson).to.include.keys('protocol', 'publink', 'host', 'hostname', 'port');
+        });
     });
-
-    it("contains protocol, host, hostname, port, publink", function() {
-      expect(publicJson).to.include.keys('protocol', 'publink', 'host', 'hostname', 'port');
-      expect(privateJson).to.include.keys('protocol', 'publink', 'host', 'hostname', 'port');
-      expect(dbJson).to.include.keys('protocol', 'publink', 'host', 'hostname', 'port');
+    describe("private db", function () {
+        it("has properties: auth, user, password, db, pubdb, mydb", function () {
+            expect(privateJson).to.include.keys('auth', 'user', 'password', 'db', 'pubdb', 'mydb');
+        });
     });
-
-
-  });
-
-  describe("private db", function() {
-    it("has properties: auth, user, password, db, pubdb, mydb", function() {
-      expect(privateJson).to.include.keys('auth', 'user', 'password', 'db', 'pubdb','mydb');
-    });
-  });
 });
+
+//# sourceMappingURL=data:application/json;base64,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QUFDLENBQUMsRUFBRSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLE1BQU0sRUFBRSxVQUFVLEVBQUUsSUFBSSxFQUFFLE9BQU8sRUFBQyxNQUFNLENBQUMsQ0FBQztRQUN4RixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQyxDQUFDLENBQUMiLCJmaWxlIjoidGVzdC9jdXN0b20uanMiLCJzb3VyY2VzQ29udGVudCI6WyJsZXQgZXhwZWN0ICAgID0gcmVxdWlyZShcImNoYWlcIikuZXhwZWN0O1xuaW1wb3J0IENvdWNoanNvbmNvbmYgPSByZXF1aXJlKFwiLi4vaW5kZXhcIik7XG5sZXQgdmVyYj1yZXF1aXJlKCd2ZXJibycpO1xuXG52YXIgcHVibGljREI9e1xuICBcImNvdWNoZGJcIjp7XG4gICAgXCJwcm90b2NvbFwiOlwiaHR0cFwiLFxuICAgIFwiaG9zdG5hbWVcIjpcImNvdWNoZGIua2VybmVsLm9ubGluZVwiLFxuICAgIFwicG9ydFwiOjgwODAsXG4gICAgXCJkYlwiOlwidGVzdGRiXCJcbiAgfVxufVxudmFyIERCPXtcbiAgXCJjb3VjaGRiXCI6e1xuICAgIFwicHJvdG9jb2xcIjpcImh0dHBcIixcbiAgICBcImhvc3RuYW1lXCI6XCJjb3VjaGRiLmtlcm5lbC5vbmxpbmVcIixcbiAgICBcInBvcnRcIjo4MDgwLFxuICB9XG59XG5cbnZhciBwcml2YXRlREI9e1xuICBcImNvdWNoZGJcIjp7XG4gICAgXCJwcm90b2NvbFwiOlwiaHR0cFwiLFxuICAgIFwiaG9zdG5hbWVcIjpcImNvdWNoZGIua2VybmVsLm9ubGluZVwiLFxuICAgIFwicG9ydFwiOjgwODAsXG4gICAgXCJkYlwiOlwidGVzdGRiXCIsXG4gICAgXCJ1c2VyXCI6XCJhZG1pblwiLFxuICAgIFwicGFzc3dvcmRcIjpcImFkbWluXCJcbiAgfVxufVxuXG52YXIgZGJKc29uPW5ldyBDb3VjaGpzb25jb25mKERCLmNvdWNoZGIpO1xudmFyIHByaXZhdGVKc29uPW5ldyBDb3VjaGpzb25jb25mKHByaXZhdGVEQi5jb3VjaGRiKTtcbnZhciBwdWJsaWNKc29uPW5ldyBDb3VjaGpzb25jb25mKHB1YmxpY0RCLmNvdWNoZGIpO1xuXG5kZXNjcmliZShcImRiIHdpdGggaHR0cHMgYW5kIHN0YW5kYXJkIDQ0MyBwb3J0XCIsIGZ1bmN0aW9uKCkge1xuICBkZXNjcmliZShcInZhbGlkYXRpb25cIiwgZnVuY3Rpb24oKSB7XG4gICAgdmVyYihwcml2YXRlSnNvbik7XG5cbiAgICB2ZXJiKHB1YmxpY0pzb24uZm9yKCdhYScsJ21tJykpO1xuICAgIHZlcmIocHVibGljSnNvbi5mb3IoJ2FhJywnbW0nLCd6eicpKTtcbiAgICBpdChcImlzIGEganNvblwiLCBmdW5jdGlvbigpIHtcbiAgICAgIGV4cGVjdChwdWJsaWNKc29uKS50by5iZS5hKCdvYmplY3QnKTtcbiAgICAgIGV4cGVjdChwcml2YXRlSnNvbikudG8uYmUuYSgnb2JqZWN0Jyk7XG4gICAgICBleHBlY3QoZGJKc29uKS50by5iZS5hKCdvYmplY3QnKTtcblxuICAgIH0pO1xuXG4gICAgaXQoXCJjb250YWlucyBwcm90b2NvbCwgaG9zdCwgaG9zdG5hbWUsIHBvcnQsIHB1YmxpbmtcIiwgZnVuY3Rpb24oKSB7XG4gICAgICBleHBlY3QocHVibGljSnNvbikudG8uaW5jbHVkZS5rZXlzKCdwcm90b2NvbCcsICdwdWJsaW5rJywgJ2hvc3QnLCAnaG9zdG5hbWUnLCAncG9ydCcpO1xuICAgICAgZXhwZWN0KHByaXZhdGVKc29uKS50by5pbmNsdWRlLmtleXMoJ3Byb3RvY29sJywgJ3B1YmxpbmsnLCAnaG9zdCcsICdob3N0bmFtZScsICdwb3J0Jyk7XG4gICAgICBleHBlY3QoZGJKc29uKS50by5pbmNsdWRlLmtleXMoJ3Byb3RvY29sJywgJ3B1YmxpbmsnLCAnaG9zdCcsICdob3N0bmFtZScsICdwb3J0Jyk7XG4gICAgfSk7XG5cblxuICB9KTtcblxuICBkZXNjcmliZShcInByaXZhdGUgZGJcIiwgZnVuY3Rpb24oKSB7XG4gICAgaXQoXCJoYXMgcHJvcGVydGllczogYXV0aCwgdXNlciwgcGFzc3dvcmQsIGRiLCBwdWJkYiwgbXlkYlwiLCBmdW5jdGlvbigpIHtcbiAgICAgIGV4cGVjdChwcml2YXRlSnNvbikudG8uaW5jbHVkZS5rZXlzKCdhdXRoJywgJ3VzZXInLCAncGFzc3dvcmQnLCAnZGInLCAncHViZGInLCdteWRiJyk7XG4gICAgfSk7XG4gIH0pO1xufSk7XG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=

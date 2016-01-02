@@ -1,12 +1,12 @@
 var expect    = require("chai").expect,
-couchjsonconf=require('../index.js'),
+Couchjsonconf=require('../index.js'),
 verb=require('verbo');
 
 var publicDB={
   "couchdb":{
     "hostname":"couchdb.kernel.online",
     "port":"80",
-    "database":"testdb"
+    "db":"testdb"
   }
 }
 var DB={
@@ -20,15 +20,15 @@ var privateDB={
   "couchdb":{
     "hostname":"couchdb.kernel.online",
     "port":"80",
-    "database":"testdb",
+    "db":"testdb",
     "user":"admin",
     "password":"admin"
   }
 }
 
-var dbJson=new couchjsonconf(DB.couchdb);
-var privateJson=new couchjsonconf(privateDB.couchdb);
-var publicJson=new couchjsonconf(publicDB.couchdb);
+var dbJson=new Couchjsonconf(DB.couchdb);
+var privateJson=new Couchjsonconf(privateDB.couchdb);
+var publicJson=new Couchjsonconf(publicDB.couchdb);
 
 describe("db with https and standard 443 port", function() {
   describe("validation", function() {
