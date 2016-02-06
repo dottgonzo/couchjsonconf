@@ -1,0 +1,15 @@
+{
+  "ambientDependencies": {
+    "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "chai": "github:DefinitelyTyped/DefinitelyTyped/chai/chai.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "gulp-concat": "github:DefinitelyTyped/DefinitelyTyped/gulp-concat/gulp-concat.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "gulp-mocha": "github:DefinitelyTyped/DefinitelyTyped/gulp-mocha/gulp-mocha.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "gulp-sourcemaps": "github:DefinitelyTyped/DefinitelyTyped/gulp-sourcemaps/gulp-sourcemaps.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "gulp-typescript": "github:DefinitelyTyped/DefinitelyTyped/gulp-typescript/gulp-typescript.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "gulp": "github:DefinitelyTyped/DefinitelyTyped/gulp/gulp.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "orchestrator": "github:DefinitelyTyped/DefinitelyTyped/orchestrator/orchestrator.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a",
+    "Q": "github:DefinitelyTyped/DefinitelyTyped/q/Q.d.ts#fe563dff3428bac1260d1794e2c2ecf8f097535a"
+  }
+}
