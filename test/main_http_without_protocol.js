@@ -5,21 +5,21 @@ verb=require('verbo');
 var publicDB={
   "couchdb":{
     "hostname":"couchdb.kernel.online",
-    "port":"80",
+    "port":80,
     "db":"testdb"
   }
 }
 var DB={
   "couchdb":{
     "hostname":"couchdb.kernel.online",
-    "port":"80",
+    "port":80,
   }
 }
 
 var privateDB={
   "couchdb":{
     "hostname":"couchdb.kernel.online",
-    "port":"80",
+    "port":80,
     "db":"testdb",
     "user":"admin",
     "password":"admin"

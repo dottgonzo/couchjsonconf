@@ -6,7 +6,7 @@ var publicDB={
   "couchdb":{
     "protocol":"http",
     "hostname":"couchdb.kernel.online",
-    "port":"80",
+    "port":80,
     "db":"testdb"
   }
 }
@@ -14,7 +14,7 @@ var DB={
   "couchdb":{
     "protocol":"http",
     "hostname":"couchdb.kernel.online",
-    "port":"80",
+    "port":80,
   }
 }
 
@@ -22,7 +22,7 @@ var privateDB={
   "couchdb":{
     "protocol":"http",
     "hostname":"couchdb.kernel.online",
-    "port":"80",
+    "port":80,
     "db":"testdb",
     "user":"admin",
     "password":"admin"

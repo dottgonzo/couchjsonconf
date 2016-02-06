@@ -110,5 +110,4 @@ export = class CDBUrl implements IClassConf {
 
     };
 
-
 };
