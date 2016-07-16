@@ -1,5 +1,5 @@
 let expect    = require("chai").expect;
-import Couchjsonconf = require("../index");
+import couchJsonConf from "../index";
 let verb = require("verbo");
 
 let publicDB = {
@@ -29,9 +29,9 @@ let privateDB = {
   }
 };
 
-let dbJson = new Couchjsonconf(DB.couchdb);
-let privateJson = new Couchjsonconf(privateDB.couchdb);
-let publicJson = new Couchjsonconf(publicDB.couchdb);
+let dbJson = new couchJsonConf(DB.couchdb);
+let privateJson = new couchJsonConf(privateDB.couchdb);
+let publicJson = new couchJsonConf(publicDB.couchdb);
 
 describe("db with https and standard 443 port", function() {
   describe("validation", function() {

@@ -26,9 +26,9 @@ var privateDB={
   }
 }
 
-var dbJson=new Couchjsonconf(DB.couchdb);
-var privateJson=new Couchjsonconf(privateDB.couchdb);
-var publicJson=new Couchjsonconf(publicDB.couchdb);
+var dbJson=new Couchjsonconf.default(DB.couchdb);
+var privateJson=new Couchjsonconf.default(privateDB.couchdb);
+var publicJson=new Couchjsonconf.default(publicDB.couchdb);
 
 describe("db with https and standard 443 port", function() {
   describe("validation", function() {

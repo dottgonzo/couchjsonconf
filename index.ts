@@ -1,6 +1,3 @@
-"use strict";
-
-
 interface IClassConf {
     hostname: string;
     protocol?: string;
@@ -10,7 +7,7 @@ interface IClassConf {
     password?: string;
 }
 
-export = class CDBUrl implements IClassConf {
+export default class couchJsonConf implements IClassConf {
     publink: string;
     protocol: string;
     port: number;
